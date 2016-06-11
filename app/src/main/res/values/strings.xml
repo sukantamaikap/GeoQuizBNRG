@@ -4,4 +4,6 @@
     <string name="true_button">true</string>
     <string name="false_button">false</string>
     <string name="question_text">Constantinopole is the largst city in Turkey</string>
+    <string name="correct_text">Correct !!</string>
+    <string name="incorrect_text">Incorrect !!!</string>
 </resources>
