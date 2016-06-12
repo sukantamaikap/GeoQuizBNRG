@@ -10,24 +10,24 @@ import android.widget.Toast;
 
 public class QuizActivity extends AppCompatActivity {
 
-    private Button mTrueButton;
-    private Button mFalseButton;
+    private Button _trueButton;
+    private Button _falseButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
-        this.mTrueButton = (Button) findViewById(R.id.true_button);
-        this.mTrueButton.setOnClickListener(new View.OnClickListener() {
+        this._trueButton = (Button) findViewById(R.id.true_button);
+        this._trueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
                 Toast.makeText(QuizActivity.this, R.string.correct_text, Toast.LENGTH_LONG).show();
             }
         });
 
-        this.mFalseButton = (Button) findViewById(R.id.false_button);
-        this.mFalseButton.setOnClickListener(new View.OnClickListener() {
+        this._falseButton = (Button) findViewById(R.id.false_button);
+        this._falseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
                 Toast.makeText(QuizActivity.this, R.string.incorrect_text, Toast.LENGTH_LONG).show();
