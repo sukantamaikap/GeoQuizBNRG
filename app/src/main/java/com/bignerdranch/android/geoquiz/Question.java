@@ -7,6 +7,11 @@ public class Question {
     private int _textResId;
     private boolean _answerTrue;
 
+    public Question (int textResId, boolean answerTrue) {
+        this._textResId = textResId;
+        this._answerTrue = answerTrue;
+    }
+
     public boolean isAnswerTrue () {
         return this._answerTrue;
     }
