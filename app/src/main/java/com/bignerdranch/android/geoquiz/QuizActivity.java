@@ -1,11 +1,13 @@
 package com.bignerdranch.android.geoquiz;
 
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,7 +15,8 @@ public class QuizActivity extends AppCompatActivity {
 
     private Button _trueButton;
     private Button _falseButton;
-    private Button _nextButton;
+    private ImageButton _nextButton;
+    private ImageButton _previousButton;
     private TextView _questionTextView;
     private int _currentIndex = 0;
     private Question[] _questionBank = new Question[] {
@@ -47,13 +50,28 @@ public class QuizActivity extends AppCompatActivity {
 
         this._questionTextView = (TextView) findViewById(R.id.question_text_view);
         this._questionTextView.setText(this._questionBank[this._currentIndex].getTextResId());
+        this._questionTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View v) {
+                QuizActivity.this.showNextQuestion();
+            }
+        });
 
-        this._nextButton = (Button) findViewById(R.id.next_button);
+        this._nextButton = (ImageButton) findViewById(R.id.next_button);
         this._nextButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick (View v) {
-                QuizActivity.this._currentIndex = (QuizActivity.this._currentIndex + 1) % QuizActivity.this._questionBank.length;
+                QuizActivity.this.showNextQuestion();
+            }
+        });
+
+        this._previousButton = (ImageButton) findViewById(R.id.previous_button);
+        this._previousButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick (View v) {
+                QuizActivity.this._currentIndex = QuizActivity.this._currentIndex == 0 ? (QuizActivity.this._questionBank.length - 1) : (QuizActivity.this._currentIndex -1);
                 QuizActivity.this._questionTextView.setText(QuizActivity.this._questionBank[QuizActivity.this._currentIndex].getTextResId());
             }
         });
@@ -71,6 +89,11 @@ public class QuizActivity extends AppCompatActivity {
         }
 
         Toast.makeText(this, toastId,Toast.LENGTH_SHORT).show();
+    }
+
+    private void showNextQuestion() {
+        this._currentIndex = (this._currentIndex + 1) % this._questionBank.length;
+        this._questionTextView.setText(this._questionBank[this._currentIndex].getTextResId());
     }
 
     //=============================================================================
