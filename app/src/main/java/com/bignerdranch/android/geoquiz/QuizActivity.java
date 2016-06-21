@@ -3,6 +3,7 @@ package com.bignerdranch.android.geoquiz;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +20,8 @@ public class QuizActivity extends AppCompatActivity {
     private ImageButton _previousButton;
     private TextView _questionTextView;
     private int _currentIndex = 0;
+    private static final String TAG = "QuizActivity";
+    private static final String KEY_INDEX = "index";
     private Question[] _questionBank = new Question[] {
             new Question(R.string.question_ocean, true),
             new Question(R.string.question_mideast, false),
@@ -28,9 +31,14 @@ public class QuizActivity extends AppCompatActivity {
     };
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate() called");
         setContentView(R.layout.activity_quiz);
+
+        if (savedInstanceState != null) {
+            this._currentIndex = savedInstanceState.getInt(KEY_INDEX);
+        }
 
         this._trueButton = (Button) findViewById(R.id.true_button);
         this._trueButton.setOnClickListener(new View.OnClickListener() {
@@ -97,6 +105,43 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     //=============================================================================
+
+    @Override
+    public void onSaveInstanceState(final Bundle saveInstanceState) {
+        super.onSaveInstanceState(saveInstanceState);
+        Log.i(TAG, "inside onSaveInstanceState()");
+        saveInstanceState.putInt(KEY_INDEX, this._currentIndex);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d(TAG, "onStart() called");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause() called");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume() called");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.d(TAG, "onStop() called");
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        Log.d(TAG, "onDestroy() called");
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
