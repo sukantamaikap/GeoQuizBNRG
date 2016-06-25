@@ -22,7 +22,6 @@ public class QuizActivity extends AppCompatActivity {
     private ImageButton _previousButton;
     private TextView _questionTextView;
     private int _currentIndex = 0;
-    private boolean _isCheater;
 
     private static final String TAG = "QuizActivity";
     private static final String KEY_INDEX = "index";
@@ -106,9 +105,10 @@ public class QuizActivity extends AppCompatActivity {
 
     private void checkAnswer(final boolean pressedTrue) {
         final boolean correctAnswer = this._questionBank[this._currentIndex].isAnswerTrue();
+        final boolean cheated = this._questionBank[this._currentIndex].isCheated();
         int toastId = 0;
 
-        if (this._isCheater) {
+        if (cheated) {
             toastId = R.string.judgement_toast;
         } else {
             if (pressedTrue == correctAnswer) {
@@ -197,7 +197,7 @@ public class QuizActivity extends AppCompatActivity {
             if (data == null) {
                 return;
             }
-            this._isCheater = CheatActivity.wasAnswerShown(data);
+            this._questionBank[this._currentIndex].setCheated(CheatActivity.wasAnswerShown(data));
         }
     }
 }

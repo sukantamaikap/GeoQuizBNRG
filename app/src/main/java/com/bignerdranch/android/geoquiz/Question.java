@@ -6,6 +6,7 @@ package com.bignerdranch.android.geoquiz;
 public class Question {
     private int _textResId;
     private boolean _answerTrue;
+    private boolean _cheated;
 
     public Question (int textResId, boolean answerTrue) {
         this._textResId = textResId;
@@ -26,5 +27,15 @@ public class Question {
 
     public void setTextResId (int textResId) {
         this._textResId = textResId;
+    }
+
+    public boolean isCheated() {
+        return this._cheated;
+    }
+
+    public void setCheated(final boolean cheated) {
+        if (!this._cheated) {
+            this._cheated = cheated;
+        }
     }
 }
